@@ -637,6 +637,7 @@ enums = {
 
     enum[gene_body_part] = {
         head
+        torso
     }
 
     enum[gene_decal_blend_mode] = {
