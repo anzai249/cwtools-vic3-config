@@ -654,6 +654,12 @@ enums = {
         girl
     }
 
+    enum[gene_decal_order] = {
+        pre_skin_color
+        post_skin_color
+        pre
+    }
+
     enum[event_category] = {
         enactment
     }

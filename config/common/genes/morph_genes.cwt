@@ -166,5 +166,8 @@ single_alias[morph_gene_gender_settings_clause] = {
         age = single_alias_right[gene_age_clause]
 
         priority = int
+
+        ## cardinality = 0..1
+        decal_apply_order = enum[gene_decal_order]
     }
 }

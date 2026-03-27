@@ -5,6 +5,7 @@ types = {
     }
 }
 
+## replace_scope = { root = country this = country }
 party = {
     ### Party color
     color = <named_color>
@@ -25,7 +26,6 @@ party = {
     }
 
     ## cardinality = 0..1
-    ## replace_scope = { root = country this = country }
     ### Conditions that must evaluate true to have this party in a country
     ### THIS IS RUN ONLY ONCE AT GAME START
     valid_for_country = single_alias_right[trigger_clause]
