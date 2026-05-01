@@ -104,6 +104,13 @@ journal_entry = {
     on_complete = single_alias_right[effect_clause]
 
     ## cardinality = 0..inf
+    widget = {
+        gui = filepath
+        name = scalar
+        container = enum[journal_inject_point]
+    }
+
+    ## cardinality = 0..inf
     ### dynamically updated text, which describes potential event outcomes when JE is completed
     ### multiple such entries can be added to a JE
     event_outcome_completed_desc = single_alias_right[complex_desc]
@@ -285,7 +292,11 @@ journal_entry = {
 
     ## cardinality = 0..1
     ### whether a Journal Entry should be pinned in its outliner by default. Defaults to 'no'
-    should_be_pinned_by_default = bool
+    should_be_pinned_by_default_uninvolved_or_context  = bool
+
+    ## cardinality = 0..1
+    ### whether a Journal Entry should be pinned in its outliner by default. Defaults to 'no'
+    should_be_pinned_by_default_involved  = bool
 
     ## cardinality = 0..inf
     ### scripted progress bars the name and definition of the bar is placed under game/scripted_progress_bars

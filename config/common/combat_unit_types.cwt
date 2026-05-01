@@ -34,6 +34,9 @@ combat_unit_type = {
     ## cardinality = ~1..1
     max_manpower = int
 
+    ## cardinality = ~1..1
+    supply_capacity = int
+
     ## cardinality = 0..1
     can_build = single_alias_right[trigger_clause]
 

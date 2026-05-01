@@ -19,7 +19,7 @@ production_method = {
 
     ## cardinality = 0..1
     profession_ratio = {
-        <pop_type> = int
+        <pop_type> = float
     }
 
     ## cardinality = 0..1

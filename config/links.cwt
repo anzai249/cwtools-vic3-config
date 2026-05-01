@@ -673,13 +673,6 @@ links = {
 		output_scope = value
 		type = value
 	}
-	### Scope to the number of active declared interests a country has
-	num_active_declared_interests = {
-		desc = "Scope to the number of active declared interests a country has"
-		input_scopes = country
-		output_scope = value
-		type = value
-	}
 	### Scope to the number of active interests a country has
 	num_active_interests = {
 		desc = "Scope to the number of active interests a country has"
@@ -793,27 +786,6 @@ links = {
 	### Scope to the country's number of commanders
 	num_commanders = {
 		desc = "Scope to the country's number of commanders"
-		input_scopes = country
-		output_scope = value
-		type = value
-	}
-	### Get the scoped country's current number of available convoys
-	num_convoys_available = {
-		desc = "Get the scoped country's current number of available convoys"
-		input_scopes = country
-		output_scope = value
-		type = value
-	}
-	### Get the scoped country's current number of required convoys
-	num_convoys_required = {
-		desc = "Get the scoped country's current number of required convoys"
-		input_scopes = country
-		output_scope = value
-		type = value
-	}
-	### Scope to the number of declared interests a country has (including inactive)
-	num_declared_interests = {
-		desc = "Scope to the number of declared interests a country has (including inactive)"
 		input_scopes = country
 		output_scope = value
 		type = value
@@ -1058,7 +1030,7 @@ links = {
 	### Scope to the owner country of object
 	owner = {
 		desc = "Scope to the owner country of object"
-		input_scopes = { country state company province pop building interest_group market market_goods interest_marker character institution law journal_entry trade_route decree combat_unit new_combat_unit military_formation political_movement }
+		input_scopes = { country state company province pop building interest_group market market_goods interest_marker character institution law journal_entry trade_route decree combat_unit new_combat_unit military_formation political_movement ship }
 		output_scope = country
 	}
 	### Scope to the attacker warleader of a war
@@ -1113,7 +1085,7 @@ links = {
 	### Scope from an object to its type
 	type = {
 		desc = "Scope from an object to its type"
-		input_scopes = { building institution law commander_order company interest_group harvest_condition law amendment political_movement }
+		input_scopes = { building company diplomatic_play diplomatic_catalyst political_lobby institution interest_group law political_movement ship harvest_condition_area amendment }
 		output_scope = any
 	}
 	### Scope to a harvest condition type from its name (harvest_condition_type:drought)
@@ -1318,12 +1290,6 @@ links = {
 	second_country = {
 		desc = "Used when calculating values for actions between countries such as diplomatic plays"
 		output_scope = country
-	}
-	### Scope from a military formation to its highest ranking commander character
-	highest_ranked_commander = {
-		desc = "Scope from a military formation to its highest ranking commander character"
-		input_scopes = military_formation
-		output_scope = character
 	}
 	### Number of units in a MilitaryFormation which currently don't have a commander due to commanders Command Limit. Obs: defeated commanders do not command units, i.e., the more defeated commanders, the more commanderless units.
 	num_commanderless_units = {
@@ -1736,10 +1702,10 @@ links = {
 		input_scopes = character
 		output_scope = country
 	}
-	### Loyalty value of a subject country
+	### Compares the character loyalty
 	loyalty = {
-		desc = "Loyalty value of a subject country"
-		input_scopes = country
+		desc = "Compares the character loyalty"
+		input_scopes = character
 		output_scope = value
 		type = value
 	}
@@ -2232,9 +2198,9 @@ links = {
 		input_scope = { character }
 		output_scope = interest_group_type
 	}
-	### Gets years of service of a character
+	### Compares the commander's years of service
 	years_of_service = {
-		desc = "Gets years of service of a character"
+		desc = "Compares the commander's years of service"
 		input_scopes = character
 		output_scope = value
 		type = value
@@ -4562,13 +4528,6 @@ links = {
 		prefix = years_to_incorporate:
 		data_source = scope[country]
 	}
-	### Compares the maximum number of declared interests of scoped country
-	max_num_declared_interests = {
-		desc = "Compares the maximum number of declared interests of scoped country"
-		input_scopes = { country }
-		output_scope = value
-		type = value
-	}
 	### Compare number of Isolated States
 	isolated_states = {
 		desc = "Compare number of Isolated States"
@@ -4962,28 +4921,6 @@ links = {
 		prefix = remaining_undepleted:
 		data_source = <building>
 	}
-	### Checks that a country has a certain percentage of a specific navy unit type
-	country_navy_unit_type_fraction = {
-		desc = "Checks that a country has a certain percentage of a specific navy unit type"
-		input_scopes = { country }
-		output_scope = value
-		type = value
-		from_data = yes
-		from_argument = yes
-		prefix = country_navy_unit_type_fraction:
-		data_source = scope[combat_unit_type]
-	}
-	### Checks that a formation has a certain percentage of a specific navy unit type
-	formation_navy_unit_type_fraction = {
-		desc = "Checks that a formation has a certain percentage of a specific navy unit type"
-		input_scopes = { military_formation }
-		output_scope = value
-		type = value
-		from_data = yes
-		from_argument = yes
-		prefix = formation_navy_unit_type_fraction:
-		data_source = scope[combat_unit_type]
-	}
 	### Checks that a country has a certain percentage of a specific army unit type
 	country_army_unit_type_fraction = {
 		desc = "Checks that a country has a certain percentage of a specific army unit type"
@@ -5213,6 +5150,382 @@ links = {
 	migration_pull = {
 		desc = "Get the migration pull for a state or the mass migration pull for a country."
 		input_scopes = { country state }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships for military formations in the province that are allied to the specified country
+	num_active_ships = {
+		desc = "Get the number of active ships for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships in battle for military formations in the province that are allied to the specified country
+	num_active_ships_in_battle = {
+		desc = "Get the number of active ships in battle for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships not in battle for military formations in the province that are allied to the specified country
+	num_active_ships_not_in_battle = {
+		desc = "Get the number of active ships not in battle for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships for military formations in the province that are allied to the specified country
+	num_non_destroyed_ships = {
+		desc = "Get the number of non-destroyed ships for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships in battle for military formations in the province that are allied to the specified country
+	num_non_destroyed_ships_in_battle = {
+		desc = "Get the number of non-destroyed ships in battle for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships not in battle for military formations in the province that are allied to the specified country
+	num_non_destroyed_ships_not_in_battle = {
+		desc = "Get the number of non-destroyed ships not in battle for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships for military formations in the province that are allied to the specified country
+	num_ships = {
+		desc = "Get the number of ships for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships in battle for military formations in the province that are allied to the specified country
+	num_ships_in_battle = {
+		desc = "Get the number of ships in battle for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Get the number of active ships not in battle for military formations in the province that are allied to the specified country
+	num_ships_not_in_battle = {
+		desc = "Get the number of ships not in battle for military formations in the province that are allied to the specified country"
+		input_scopes = { country character military_formation }
+		output_scope = value
+		type = value
+	}
+	### Scope from a military formation to its commander character
+	commander = {
+		desc = "Scope from a military formation to its commander character"
+		input_scopes = { military_formation }
+		output_scope = character
+		type = scope
+	}
+	### Links from a fleet scope to the total detection of the ships in the fleet
+	detection = {
+		desc = "Links from a fleet scope to the total detection of the ships in the fleet"
+		input_scopes = { military_formation }
+		output_scope = value
+		type = value
+	}
+	### Links from a fleet scope to the total screening of the ships in the fleet
+	screening = {
+		desc = "Links from a fleet scope to the total screening of the ships in the fleet"
+		input_scopes = { military_formation }
+		output_scope = value
+		type = value
+	}
+	### Links from a fleet scope to the total visibility of the ships in the fleet
+	visibility = {
+		desc = "Links from a fleet scope to the total visibility of the ships in the fleet"
+		input_scopes = { military_formation }
+		output_scope = value
+		type = value
+	}
+	### Links from a fleet scope to the total vulnerability of the ships in the fleet
+	vulnerability = {
+		desc = "Links from a fleet scope to the total vulnerability of the ships in the fleet"
+		input_scopes = { military_formation }
+		output_scope = value
+		type = value
+	}
+	### Scope to the ship input in a treaty article
+	input_ship = {
+		desc = "Scope to the ship input in a treaty article"
+		input_scopes = { treaty_article treaty_article_options }
+		output_scope = ship
+		type = scope
+	}
+	### Links from a ship scope to the ship fleet
+	ship_fleet = {
+		desc = "Links from a ship scope to the ship fleet"
+		input_scopes = { ship }
+		output_scope = military_formation
+		type = scope
+	}
+	### Scope from a ship to its group
+	ship_group = {
+		desc = "Scope from a ship to its group"
+		input_scopes = { ship }
+		output_scope = ship_group
+		type = scope
+	}
+	### Scope to a ship group from its name
+	ship_group_link = {
+		desc = "Scope to a ship group from its name"
+		input_scopes = { any }
+		output_scope = ship_group
+		type = scope
+		prefix = ship_group:
+		from_data = yes
+		data_source = <ship_group>
+	}
+	### Scope to a ship type from its name
+	ship_type = {
+		desc = "Scope to a ship type from its name"
+		input_scopes = { any }
+		output_scope = ship_type
+		type = scope
+		prefix = ship_type:
+		from_data = yes
+		data_source = <ship_type>
+	}
+	### Get the flagship of the scoped country
+	flagship = {
+		desc = "Get the flagship of the scoped country"
+		input_scopes = { country }
+		output_scope = ship
+		type = scope
+	}
+	### Get the flagship of the scoped country
+	num_ships_of_group = {
+		desc = "Get the flagship of the scoped country"
+		input_scopes = { country }
+		output_scope = ship
+		type = scope
+		prefix = num_ships_of_group:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[ship_group]
+	}
+	### Get the power projection value of the scoped formation, unit, or ship
+	power_projection = {
+		desc = "Get the power projection value of the scoped formation, unit, or ship"
+		input_scopes = { new_combat_unit military_formation ship }
+		output_scope = value
+		type = value
+	}
+	### Compare a ship's armor
+	armor = {
+		desc = "Compare a ship's armor"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Compares the broken chain of command penalty multiplier of a country
+	broken_chain_of_command_penalty = {
+		desc = "Compares the broken chain of command penalty multiplier of a country"
+		input_scopes = { country }
+		output_scope = value
+		type = value
+	}
+	### Checks that a country has a certain fraction of a specific ship type
+	country_ship_type_fraction = {
+		desc = "Checks that a country has a certain fraction of a specific ship type"
+		input_scopes = { country }
+		output_scope = value
+		type = value
+		prefix = country_ship_type_fraction:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[ship_type]
+	}
+	### Checks that a formation has a certain fraction of a specific ship type
+	formation_ship_type_fraction = {
+		desc = "Checks that a formation has a certain fraction of a specific ship type"
+		input_scopes = { military_formation }
+		output_scope = value
+		type = value
+		prefix = formation_ship_type_fraction:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[ship_type]
+	}
+	### Compare a ship's current crew
+	crew = {
+		desc = "Compare a ship's current crew"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Compare a ship's current crew
+	crew_percent = {
+		desc = "Compare a ship's current crew"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Checks the scoped country's interest tier rank in a specific strategic region
+	has_strategic_region_interest_tier = {
+		desc = "Checks the scoped country's interest tier rank in a specific strategic region"
+		input_scopes = { country }
+		output_scope = value
+		type = value
+		prefix = has_strategic_region_interest_tier:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[strategic_region]
+	}
+	### Compares the highest interest tier rank (scope country) among strategic regions where both countries have an interest.
+	highest_overlapping_interest_tier = {
+		desc = "Compares the highest interest tier rank (scope country) among strategic regions where both countries have an interest."
+		input_scopes = { country }
+		output_scope = value
+		type = value
+		prefix = highest_overlapping_interest_tier:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[country]
+	}
+	### Compare a ship's current hit points
+	hit_points = {
+		desc = "Compare a ship's current hit points"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Compare a ship's current hit points
+	hit_points_percent = {
+		desc = "Compare a ship's current hit points"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Compares the loyalty in a given state, i.e. the fraction of Loyalists
+	loyalists = {
+		desc = "Compares the loyalty in a given state, i.e. the fraction of Loyalists"
+		input_scopes = { state }
+		output_scope = value
+		type = value
+	}
+	### Checks the political strength share of a pop type, religion or culture in a country or state.
+	political_strength_share_pop_type = {
+		desc = "Checks the political strength share of a pop type, religion or culture in a country or state."
+		input_scopes = { country state }
+		output_scope = value
+		type = value
+		prefix = political_strength_share:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[pop_type]
+	}
+	### Checks the political strength share of a pop type, religion or culture in a country or state.
+	political_strength_share_religion = {
+		desc = "Checks the political strength share of a pop type, religion or culture in a country or state."
+		input_scopes = { country state }
+		output_scope = value
+		type = value
+		prefix = political_strength_share:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[religion]
+	}
+	### Checks the political strength share of a pop type, religion or culture in a country or state.
+	political_strength_share_culture = {
+		desc = "Checks the political strength share of a pop type, religion or culture in a country or state."
+		input_scopes = { country state }
+		output_scope = value
+		type = value
+		prefix = political_strength_share:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[culture]
+	}
+	### Checks the wealth political strength share of a pop type, religion or culture in a country or state.
+	wealth_share_pop_type = {
+		desc = "Checks the wealth political strength share of a pop type, religion or culture in a country or state."
+		input_scopes = { country state }
+		output_scope = value
+		type = value
+		prefix = wealth_share:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[pop_type]
+	}
+	### Checks the wealth political strength share of a pop type, religion or culture in a country or state.
+	wealth_share_religion = {
+		desc = "Checks the wealth political strength share of a pop type, religion or culture in a country or state."
+		input_scopes = { country state }
+		output_scope = value
+		type = value
+		prefix = wealth_share:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[religion]
+	}
+	### Checks the wealth political strength share of a pop type, religion or culture in a country or state.
+	wealth_share_culture = {
+		desc = "Checks the wealth political strength share of a pop type, religion or culture in a country or state."
+		input_scopes = { country state }
+		output_scope = value
+		type = value
+		prefix = wealth_share:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[culture]
+	}
+	### Compare the potential income of the country (weekly income plus tax waste)
+	potential_income = {
+		desc = "Compare the potential income of the country (weekly income plus tax waste)"
+		input_scopes = { country }
+		output_scope = value
+		type = value
+	}
+	### Compare a ship's power projection
+	power_projection_value = {
+		desc = "Compare a ship's power projection"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Compares the character prominence
+	prominence = {
+		desc = "Compares the character prominence"
+		input_scopes = { character }
+		output_scope = value
+		type = value
+	}
+	### Compares the aggregated AI strategy region score for the specified strategic region in country scope
+	region_score = {
+		desc = "Compares the aggregated AI strategy region score for the specified strategic region in country scope"
+		input_scopes = { country }
+		output_scope = value
+		type = value
+		prefix = region_score:
+		from_data = yes
+		from_argument = yes
+		data_source = scope[strategic_region]
+	}
+	### Compares the priority of the character role
+	role_priority = {
+		desc = "Compares the priority of the character role"
+		input_scopes = { character_role }
+		output_scope = value
+		type = value
+	}
+	### Compare a ship's speed
+	speed = {
+		desc = "Compare a ship's speed"
+		input_scopes = { ship }
+		output_scope = value
+		type = value
+	}
+	### Compare the tax waste of the country
+	tax_waste = {
+		desc = "Compare the tax waste of the country"
+		input_scopes = { country }
 		output_scope = value
 		type = value
 	}

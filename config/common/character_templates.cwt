@@ -28,14 +28,20 @@ character_template = {
     culture = random
     ## cardinality = 0..1
     culture = ig_before_primary_culture
+    ## cardinality = 0..1
+    culture = ig_before_random_accepted
+
+    ## cardinality = 0..1
+    company = scope[company]
 
     ## cardinality = 0..1
     religion = scope[religion]
     ## cardinality = 0..1
     religion = <religion>
-
     ## cardinality = 0..1
     religion = random
+    ## cardinality = 0..1
+    religion = random_accepted
 
     ## cardinality = 0..1
     hq = <strategic_region>
@@ -46,6 +52,21 @@ character_template = {
     age = date_field
     ## cardinality = 0..1
     age = default
+
+    ## cardinality = 0..1
+    home_region = <state_region>
+    ## cardinality = 0..1
+    home_region = random
+
+    ## cardinality = 0..1
+    role = <character_role>
+    ## cardinality = 0..1
+    role = enum[character_role]
+
+    ## cardinality = 0..1
+    holding_type = <building>
+    ## cardinality = 0..1
+    holding_type = random
 
     ## cardinality = 0..1
     is_agitator = bool
@@ -86,6 +107,9 @@ character_template = {
     female = bool
 
     ## cardinality = 0..1
+    is_for_ruler_selector = bool
+
+    ## cardinality = 0..1
     interest_group = <interest_group>
     ## cardinality = 0..1
     interest_group = scope[interest_group]
@@ -104,10 +128,8 @@ character_template = {
     }
 
     ## cardinality = 0..1
-    trait_generation = {
-        ## cardinality = 0..inf
-        <character_trait>
-    }
+    ## replace_scope = { root = character this = character }
+    trait_generation = single_alias_right[effect_clause]
 
     ## cardinality = 0..1
     interest_group_leader_usage = {

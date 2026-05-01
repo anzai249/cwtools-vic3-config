@@ -34,6 +34,12 @@ treaty_article = {
     relations_progress_per_day = value_field
 
     ## cardinality = 0..1
+    max_target_involvement = value_field
+
+    ## cardinality = 0..1
+    target_involvement_applies_to = enum[treaty_article_target]
+
+    ## cardinality = 0..1
     ### How much progress is added to the relations between every party of a treaty
     ### containing an article of this type. Progress is a percentage, when it reaches
     ### 100 it resets to 0 and relations increase or decrease by a single point.
@@ -149,6 +155,16 @@ treaty_article = {
     ### - `scope:input`: the specific input we're looking at right now. E.g. if this is `state_valid_trigger` then `input` might be say `STATE_SVEALAND`
     ### - `scope:other_country`: the other country that isn't the root
     country_valid_trigger = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    ### Triggers for each input that determine which subsection of that category of inputs is actually valid in this situation.
+    ### If the trigger returns true, then the specific thing we're looking at is valid
+    ### The valid triggers have the following scopes available:
+    ### - `root`: Source country for the article (or potentially first otherwise)
+    ### - `scope:article`: the article in question. Do note that not all inputs have been set at this point.
+    ### - `scope:input`: the specific input we're looking at right now. E.g. if this is `state_valid_trigger` then `input` might be say `STATE_SVEALAND`
+    ### - `scope:other_country`: the other country that isn't the root
+    ship_valid_trigger = single_alias_right[trigger_clause]
 
     ## cardinality = 0..1
     ### A set of inputs required by this article type, among the list of valid inputs

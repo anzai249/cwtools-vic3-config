@@ -22,4 +22,7 @@ prestige_good = {
 
     ### Prestige Good icon
     texture = filepath
+
+    ## cardinality = 0..1
+    possible = single_alias_right[trigger_clause]
 }

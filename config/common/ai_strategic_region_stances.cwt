@@ -1,0 +1,19 @@
+types = {
+    type[ai_strategic_region_stance_type] = {
+        path = "game/common/ai_strategic_region_stance_types"
+        path_extension = .txt
+        localisation = {
+            name = $
+        }
+    }
+}
+
+ai_strategic_region_stance_type = {
+    icon = filepath
+
+    ## cardinality = 0..1
+    can_send_fleets = bool
+
+    ## cardinality = 0..1
+    add_diplomatic_relevance = bool
+}

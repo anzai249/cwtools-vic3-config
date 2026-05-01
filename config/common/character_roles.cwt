@@ -1,0 +1,153 @@
+types = {
+    type[character_role] = {
+        path = "game/common/character_roles"
+        path_extension = .txt
+        localisation = {
+            name = $
+            desc = $_desc
+        }
+        subtype[typed] = {
+            type = enum[character_role]
+        }
+    }
+}
+
+## replace_scopes = { this = character root = character }
+character_role = {
+    texture = filepath
+
+    subtype[typed] = {
+        ### Archetype for this role, valid archetypes are politician/general/admiral/executive/agitator/ruler/heir/magnate. Roles do not need to have archetypes if they are fully controlled by script.
+        type = enum[character_role]
+
+        ### If this is set to yes, then all characters of this role's archetype will receive this role when created
+        ## cardinality = 0..1
+        auto_assigned = bool
+    }
+
+    ### Used to select the primary title for a character, higher priority gets selected over lower
+    priority = int
+
+    ### For how many years will a character hold this role before retiring (randomly set between min and max)
+    ## cardinality = 0..1
+    career_length = {
+        int
+        int
+    }
+
+    ### Effect that fires when a character retires from this role
+    ## cardinality = 0..1
+    on_career_end = single_alias_right[effect_clause]
+
+    ### If set to yes, characters with this role as primary will have its title in their titled name ('General Cupcakes Muffin III')
+    ## cardinality = 0..1
+    should_use_title_in_name = bool
+
+    ### Determines how titles are formatted, from_name/ruler/heir/custom, defaults to from_name. If set to custom, a customizable localization with the format key_custom_loc (example: character_role_politician_custom_loc) must be added to the customizable loc database.
+    ## cardinality = 0..1
+    title_format = enum[character_role_title_format]
+
+    ### Determines the preposition when title is shown in country context (ie, 'Ruler in France'), uses define (english default: 'in') if not set
+    ## cardinality = 0..1
+    title_preposition = localisation
+
+    ### If set to yes, characters with this role will be spawned into the pool from templates and potentially also randomly depending on spawn target values below
+    ## cardinality = 0..1
+    spawn_characters_to_pool = bool
+
+    ### Target if the character's IG is powerful
+    ### The below values are used to control when new characters of a role should be randomly generated into the character pool
+    ### The target value is the number of characters of a specific role and IG we want to hang around in the pool at different levels of IG influence
+    ### Current IG leader is counted, as are other characters that are potentially valid for IG leadership
+    ### If the number of characters of this role hanging around in the pool is below the target, we will try to create a new character.
+    ### Politicians generated randomly will get an ideology currently unrepresented in their IG, other characters use normal ideology selection
+    ### Characters generated from templates count towards but are not prevented from spawning by these values
+    ### Each of these is a script value, root = interest group
+    ### WARNING: Using complex script values here is likely to degrade performance!
+    ## cardinality = 0..1
+    pool_spawn_target_powerful = value_field
+    ### Target if the character's IG is powerful
+    ### The below values are used to control when new characters of a role should be randomly generated into the character pool
+    ### The target value is the number of characters of a specific role and IG we want to hang around in the pool at different levels of IG influence
+    ### Current IG leader is counted, as are other characters that are potentially valid for IG leadership
+    ### If the number of characters of this role hanging around in the pool is below the target, we will try to create a new character.
+    ### Politicians generated randomly will get an ideology currently unrepresented in their IG, other characters use normal ideology selection
+    ### Characters generated from templates count towards but are not prevented from spawning by these values
+    ### Each of these is a script value, root = interest group
+    ### WARNING: Using complex script values here is likely to degrade performance!
+    ## cardinality = 0..1
+    pool_spawn_target_powerful = single_alias_right[formula]
+
+    ### Target if the character's IG is influential
+    ### The below values are used to control when new characters of a role should be randomly generated into the character pool
+    ### The target value is the number of characters of a specific role and IG we want to hang around in the pool at different levels of IG influence
+    ### Current IG leader is counted, as are other characters that are potentially valid for IG leadership
+    ### If the number of characters of this role hanging around in the pool is below the target, we will try to create a new character.
+    ### Politicians generated randomly will get an ideology currently unrepresented in their IG, other characters use normal ideology selection
+    ### Characters generated from templates count towards but are not prevented from spawning by these values
+    ### Each of these is a script value, root = interest group
+    ### WARNING: Using complex script values here is likely to degrade performance!
+    ## cardinality = 0..1
+    pool_spawn_target_influential = value_field
+    ### Target if the character's IG is influential
+    ### The below values are used to control when new characters of a role should be randomly generated into the character pool
+    ### The target value is the number of characters of a specific role and IG we want to hang around in the pool at different levels of IG influence
+    ### Current IG leader is counted, as are other characters that are potentially valid for IG leadership
+    ### If the number of characters of this role hanging around in the pool is below the target, we will try to create a new character.
+    ### Politicians generated randomly will get an ideology currently unrepresented in their IG, other characters use normal ideology selection
+    ### Characters generated from templates count towards but are not prevented from spawning by these values
+    ### Each of these is a script value, root = interest group
+    ### WARNING: Using complex script values here is likely to degrade performance!
+    ## cardinality = 0..1
+    pool_spawn_target_influential = single_alias_right[formula]
+
+    ### Target if the character's IG is marginal
+    ### The below values are used to control when new characters of a role should be randomly generated into the character pool
+    ### The target value is the number of characters of a specific role and IG we want to hang around in the pool at different levels of IG influence
+    ### Current IG leader is counted, as are other characters that are potentially valid for IG leadership
+    ### If the number of characters of this role hanging around in the pool is below the target, we will try to create a new character.
+    ### Politicians generated randomly will get an ideology currently unrepresented in their IG, other characters use normal ideology selection
+    ### Characters generated from templates count towards but are not prevented from spawning by these values
+    ### Each of these is a script value, root = interest group
+    ### WARNING: Using complex script values here is likely to degrade performance!
+    ## cardinality = 0..1
+    pool_spawn_target_marginal = value_field
+    ### Target if the character's IG is marginal
+    ### The below values are used to control when new characters of a role should be randomly generated into the character pool
+    ### The target value is the number of characters of a specific role and IG we want to hang around in the pool at different levels of IG influence
+    ### Current IG leader is counted, as are other characters that are potentially valid for IG leadership
+    ### If the number of characters of this role hanging around in the pool is below the target, we will try to create a new character.
+    ### Politicians generated randomly will get an ideology currently unrepresented in their IG, other characters use normal ideology selection
+    ### Characters generated from templates count towards but are not prevented from spawning by these values
+    ### Each of these is a script value, root = interest group
+    ### WARNING: Using complex script values here is likely to degrade performance!
+    ## cardinality = 0..1
+    pool_spawn_target_marginal = single_alias_right[formula]
+
+    ### Alternative spawn control number, incompatible with IG spawn values above
+    ### Script value, target for number of characters from this role that should be spawned into the pool across a country. Created characters will be assigned IGs based via the normal IG selection logic from role etc.
+    ## cardinality = 0..1
+    pool_spawn_target_country_wide = value_field
+    ### Alternative spawn control number, incompatible with IG spawn values above
+    ### Script value, target for number of characters from this role that should be spawned into the pool across a country. Created characters will be assigned IGs based via the normal IG selection logic from role etc.
+    ## cardinality = 0..1
+    ## replace_scopes = { this = country root = country }
+    pool_spawn_target_country_wide = single_alias_right[formula]
+
+    ### Applied to characters holding this role
+    ## cardinality = 0..1
+    character_modifier = single_alias_right[modifier_clause]
+
+    ### scope:state
+    ### scope:interest_group
+    ### scope:is_monarch
+    ## cardinality = 0..1
+    ## replace_scopes = { this = country root = country }
+    holding_scores = {
+        scalar = {
+            type = <building>
+
+            score = single_alias_right[formula]
+        }
+    }
+}

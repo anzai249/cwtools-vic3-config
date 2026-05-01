@@ -206,6 +206,26 @@ ai_strategy = {
     wanted_navy_size = value_field
 
     ## cardinality = 0..1
+    wanted_marines = single_alias_right[formula]
+    ## cardinality = 0..1
+    wanted_marines = value_field
+
+    ## cardinality = 0..1
+    target_marine_formation_size = single_alias_right[formula]
+    ## cardinality = 0..1
+    target_marine_formation_size = value_field
+
+    ## cardinality = 0..1
+    max_ship_design_complexity = single_alias_right[formula]
+    ## cardinality = 0..1
+    max_ship_design_complexity = value_field
+
+    ## cardinality = 0..1
+    wanted_naval_fortification_levels = single_alias_right[formula]
+    ## cardinality = 0..1
+    wanted_naval_fortification_levels = value_field
+
+    ## cardinality = 0..1
     combat_unit_group_weights = {
         ## cardinality = 0..inf
         <combat_unit_group> = single_alias_right[formula]
@@ -268,11 +288,43 @@ ai_strategy = {
     }
 
     ## cardinality = 0..1
-    strategic_region_scores = {
+    strait_scores = {
+        ## cardinality = 0..1
+        status_scores = {
+            ## cardinality = 0..inf
+            enum[strait_status] = single_alias_right[formula]
+            ## cardinality = 0..inf
+            enum[strait_status] = value_field
+        }
+
+        ## cardinality = 0..1
+        permissions_scores = {
+            ## cardinality = 0..inf
+            enum[strait_permission] = single_alias_right[formula]
+            ## cardinality = 0..inf
+            enum[strait_permission] = value_field
+        }
+
+        ## cardinality = 0..1
+        toll_rate_scores = {
+            ## cardinality = 0..inf
+            enum[strait_toll_rate] = single_alias_right[formula]
+            ## cardinality = 0..inf
+            enum[strait_toll_rate] = value_field
+        }
+    }
+
+    ## cardinality = 0..1
+    strategic_region_scores = single_alias_right[formula]
+    ## cardinality = 0..1
+    strategic_region_scores = value_field
+
+    ## cardinality = 0..1
+    strategic_region_stance_type_scores = {
         ## cardinality = 0..inf
-        <strategic_region> = single_alias_right[formula]
+        <ai_strategic_region_stance_type> = single_alias_right[formula]
         ## cardinality = 0..inf
-        <strategic_region> = value_field
+        <ai_strategic_region_stance_type> = value_field
     }
 
     ## cardinality = 0..1

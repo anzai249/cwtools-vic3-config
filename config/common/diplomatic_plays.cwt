@@ -65,9 +65,11 @@ diplomatic_play = {
     ## cardinality = 0..1
     on_weekly_pulse = single_alias_right[effect_clause]
 
+    ## replace_scope = { ROOT = diplomatic_play THIS = diplomatic_play }
     ## cardinality = 0..1
     on_war_begins = single_alias_right[effect_clause]
 
+    ## replace_scope = { ROOT = diplomatic_play THIS = diplomatic_play }
     ## cardinality = 0..1
     on_war_end = single_alias_right[effect_clause]
 

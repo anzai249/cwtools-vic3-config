@@ -15,6 +15,13 @@ enums = {
         ruler
         heir
         executive
+        magnate
+    }
+    enum[character_role_title_format] = {
+        from_name
+        ruler
+        heir
+        custom
     }
 
     enum[character_trait_type] = {
@@ -75,9 +82,11 @@ enums = {
         "Melodies for the Masses"
         "Dawn of Wonder"
         "Songs of the Homeland"
+        "The Great Wave"
     }
 
     enum[dlc_feature] = {
+        ep2_content
         rp1_content
         ip2_content
         ip2_cosmetics
@@ -91,6 +100,7 @@ enums = {
         mp1_treaties
         mp1_cosmetics
         mp1_charter_companies
+        mp1_prestige_goods
         voice_of_the_people_content
         voice_of_the_people_preorder
         power_bloc_features
@@ -144,6 +154,11 @@ enums = {
         directed
         mutual
     }
+    enum[treaty_article_target] = {
+        mutual
+        target_country
+        source_country
+    }
 
     enum[treaty_article_usage_limits] = {
         once_per_side
@@ -187,6 +202,15 @@ enums = {
         friendly
         hostile
         target_subjects_as_input
+        is_ship_transfer
+        is_toll_exemption
+        is_no_tolls
+        is_strait_access
+        is_no_strait_closure
+        ai_consider_threaten_naval_hostilities
+        exclude_from_make_this_work
+        is_non_piracy_agreement
+        is_abandon_piracy
     }
 
     enum[treaty_article_inputs] = {
@@ -199,6 +223,7 @@ enums = {
         law_type
         country
         text
+        ship
     }
 
     enum[treaty_article_non_fulfillment_consequences] = {
@@ -354,6 +379,7 @@ enums = {
         only_friendly
         only_hostile
         only_neutral
+        not_hostile
     }
 
     # Undocumented. Added values that are used in base game
@@ -375,6 +401,7 @@ enums = {
         country
         character_in_void
         interest_group
+        scope_building
     }
 
     # Undocumented. Added values that are used in base game
@@ -614,6 +641,7 @@ enums = {
     }
 
     enum[culture_name_format] = {
+        first_last
         last_first
     }
 
@@ -868,5 +896,77 @@ enums = {
         harvest_conditions
         power_blocs
         power_blocs_leverage
+    }
+
+    enum[journal_inject_point] = {
+        custom_widget_container_je_icon
+        custom_widget_container_1
+        custom_widget_container_2
+        custom_widget_container_3
+        custom_widget_container_4
+        custom_widget_container_5
+        custom_widget_container_6
+        custom_widget_container_7
+    }
+
+    enum[ship_group_category] = {
+        capital_group
+        cruiser_group
+        torpedo_group
+        supply
+    }
+
+    enum[ship_name_definition_property_type] = {
+        custom_text
+        name_list
+        ordinal_number
+        ship_type
+        culture_surnames
+        owned_states
+        owned_hubs
+    }
+    enum[ship_name_definition_property_key] = {
+        PREFIX
+        SHIP_NAMESAKE
+        NUM
+        SHIP_TYPE_NAME
+    }
+
+    enum[temporary_hostility_type] = {
+        naval
+        war
+        limited_war
+    }
+
+    enum[strait_status] = {
+        open
+        no_military
+        closed
+    }
+    enum[strait_permission] = {
+        all
+        no_enemies
+        only_allies
+        only_controller
+    }
+    enum[strait_toll_rate] = {
+        no_tolls
+        low_tolls
+        medium_tolls
+        high_tolls
+    }
+    enum[strait_type] = {
+        artificial
+        natural
+    }
+
+    enum[harvest_condition_area_type] = {
+        sea
+    }
+
+    enum[naval_mission_type_target] = {
+        hostile
+        piracy
+        non_allies
     }
 }
