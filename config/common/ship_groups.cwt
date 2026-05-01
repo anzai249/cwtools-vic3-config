@@ -1,0 +1,31 @@
+types = {
+    type[ship_group] = {
+        path = "game/common/ship_groups"
+        path_extension = .txt
+        localisation = {
+            name = $
+            desc = $_desc
+        }
+        images = {
+            icon = icon
+        }
+    }
+}
+
+## replace_scope = { root = country this = country }
+ship_group = {
+    icon = filepath
+
+    color = <named_color>
+    color = color_field
+    color = { int[0..255] int[0..255] int[0..255] }
+
+    category = enum[ship_group_category]
+
+    ### [Default = 1] How important is this ship group to build for AI
+    ## cardinality = 0..1
+    ai_weight = value_field
+    ### [Default = 1] How important is this ship group to build for AI
+    ## cardinality = 0..1
+    ai_weight = single_alias_right[formula]
+}

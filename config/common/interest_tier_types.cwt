@@ -1,0 +1,52 @@
+types = {
+    type[interest_tier_type] = {
+        path = "game/common/interest_tier_types"
+        path_extension = .txt
+        localisation = {
+            ## required
+            name = "$"
+        }
+        images = {
+            icon = icon
+            small_icon = small_icon
+        }
+    }
+}
+
+## replace_scope = { root = country this = country }
+interest_tier_type = {
+    ### Texture path. Standard/large icon for this tier (used in detailed or large UI contexts).
+    icon = filepath
+
+    ### Texture path. Small icon for compact UI contexts and tag tooltips. Used by InterestTierType.GetName.
+    small_icon = filepath
+
+    ### Order of the tier; must be 0,1..n with no gaps or duplicates.
+    rank = int
+
+    ### Fixed-point. Inclusive lower bound of the tier.
+    min_involvement = value_field
+
+    ### Fixed-point. Exclusive upper bound for all tiers except the last, which is inclusive.
+    max_involvement = value_field
+
+    trade_advantage_exports = value_field
+
+    trade_advantage_imports = value_field
+
+    ### If yes, the country can colonize states in this strategic region when this tier is active. Default no.
+    ## cardinality = 0..1
+    colonization = bool
+
+    ### Optional effect block executed when this tier becomes active (after leaving the previous tier).
+    ## cardinality = 0..1
+    on_activate = single_alias_right[effect_clause]
+
+    ### Optional effect block executed when this tier is left (before activating the next tier).
+    ## cardinality = 0..1
+    on_deactivate = single_alias_right[effect_clause]
+
+    ### Optional modifier applied to each state in the strategic region when this tier is active.
+    ## cardinality = 0..1
+    state_modifier = single_alias_right[modifier_clause]
+}

@@ -39,6 +39,10 @@ country_rank = {
     ## cardinality = 0..1
     infamy_target_scaling = value_field
 
+    ai_pool_character_multiplier = value_field
+
+    ai_innovation_critical_threshold = value_field
+
     valid_country_types = {
         ## cardinality = 0..inf
         <country_type>

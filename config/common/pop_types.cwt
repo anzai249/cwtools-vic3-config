@@ -6,11 +6,11 @@ types = {
             ## required
             name = "$"
             ## required
-            short = "$_short"
+            only_icon = "$_only_icon"
             ## required
-            second_name = "$_name"
+            no_icon = "$_no_icon"
             ## required
-            icon = "$_icon"
+            desc = "$_desc"
         }
         images = {
             ## primary

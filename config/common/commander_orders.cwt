@@ -53,6 +53,9 @@ commander_order = {
     ## cardinality = 0..1
     escape_power_ratio = value_field
 
+    ## cardinality = 0..1
+    target_involvement_ratio = value_field
+
     ai_weight = single_alias_right[formula]
 
     ## cardinality = 0..1

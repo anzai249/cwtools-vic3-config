@@ -1,0 +1,32 @@
+types = {
+    type[ship_modification_slot] = {
+        path = "game/common/ship_modification_slots"
+        path_extension = .txt
+        localisation = {
+            name = $
+            button_0 = $_button_0
+            button_1 = $_button_1
+            button_2 = $_button_2
+        }
+        images = {
+            icon = icon
+        }
+    }
+}
+
+## replace_scope = { root = country this = country }
+ship_modification_slot = {
+    ## cardinality = 0..1
+    icon = filepath
+
+    ### [Default = yes] Is it considered an error for a ship type to not have this scripted?
+    ## cardinality = 0..1
+    required = bool
+
+    ### [Default = no] Is this a wildcard slot?
+    ## cardinality = 0..1
+    wildcard = bool
+
+    ## cardinality = 0..1
+    utility = bool
+}

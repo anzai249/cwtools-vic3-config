@@ -6,7 +6,7 @@ types = {
             recruits_combat_unit = <old_combat_unit_type>
         }
         subtype[canal] = {
-            canal = <canal>
+            strait = <strait_definition>
             unique = yes
         }
         subtype[unique] = {
@@ -177,6 +177,9 @@ building = {
     statue = bool
 
     ## cardinality = 0..1
+    recruits_sailors = bool
+
+    ## cardinality = 0..1
     centerpiece_mesh_weight = value_field
 
     ## cardinality = 0..1
@@ -197,7 +200,7 @@ building = {
 
     subtype[unique] = {
         ## cardinality = 0..1
-        canal = <canal>
+        strait = <strait_definition>
 
         ### locator type for special buildings
         locator = <game_object_locator>
@@ -210,22 +213,25 @@ building = {
 
         ### overload to use constructed entity for special buildings
         entity_constructed = single_alias_right[list_of_entities]
-
-        city_gfx_interactions = {
-            clear_size_area = bool
-            subtype[!canal] = {
-                size = int
-            }
-            subtype[canal] = {
-                clear_collision_mesh_area = bool
-            }
-        }
     }
 
     ## cardinality = 0..1
     # TODO look at scope, fails in building_railway game/common/buildings/private_infrastructure.txt
     ### under which conditions we should auto-expand if auto-expand is toggled on (overrides building group if present). if this trigger has any contents at all, the game will think the building is potentially auto-expandable, so do not write triggers that can never evaluate to true here
     should_auto_expand = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    city_gfx_interactions = {
+        clear_size_area = bool
+
+        subtype[!canal] = {
+            size = int
+        }
+
+        subtype[canal] = {
+            clear_collision_mesh_area = bool
+        }
+    }
 
     ## cardinality = 0..1
     ### defines which pop type should slaves work as. Defaults to DEFAULT_POP_TYPE.

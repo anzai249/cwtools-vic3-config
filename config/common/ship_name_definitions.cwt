@@ -1,0 +1,71 @@
+types = {
+    type[ship_name_definition] = {
+        path = "game/common/ship_name_definitions"
+        path_extension = .txt
+        subtype[template] = {
+            template = yes
+        }
+    }
+}
+
+## replace_scope = { root = ship this = ship }
+ship_name_definition = {
+    name = localisation
+
+    country = <country_definition>
+
+    ## cardinality = 0..1
+    template = bool
+
+    ## cardinality = 0..1
+    fallback = bool
+
+    ## cardinality = 0..1
+    clone_properties = <ship_name_definition>
+
+    ## cardinality = 0..1
+    culture = <culture>
+
+    ## cardinality = 0..1
+    selection_weight = value_field
+    ## cardinality = 0..1
+    selection_weight = single_alias_right[formula]
+
+    allowed_ship_types = {
+        ## cardinality = 0..inf
+        <ship_type>
+    }
+
+    properties = {
+        ## cardinality = 0..inf
+        {
+            type = enum[ship_name_definition_property_type]
+
+            key = enum[ship_name_definition_property_key]
+
+            ## cardinality = 0..1
+            custom_text = localisation
+
+            ## cardinality = 0..1
+            name_list = {
+                ## cardinality = 0..inf
+                localisation
+            }
+
+            ## cardinality = 0..1
+            quick_trigger_required_law = <law>
+
+            ## cardinality = 0..1
+            quick_trigger_forbidden_law = <law>
+
+            ## cardinality = 0..1
+            quick_trigger_country_leader_female = bool
+
+            ## cardinality = 0..1
+            quick_trigger_required_country = <country_definition>
+
+            ## cardinality = 0..1
+            trigger = single_alias_right[trigger_clause]
+        }
+    }
+}

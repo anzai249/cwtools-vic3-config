@@ -36,8 +36,8 @@ decree = {
 
     ## cardinality = 0..1
     unlocking_laws = {
-        ## cardinality = 1..inf
-        <law_type>
+        ## cardinality = 0..inf
+        <law>
     }
 
     cost = int

@@ -110,11 +110,13 @@ single_alias[instance_clause] = {
         value_field
         value_field
     }
+
     ## cardinality = 0..1
     position = {
         value_field
         value_field
     }
+
     ## cardinality = 0..1
     rotation = value_field[-360..360]
 

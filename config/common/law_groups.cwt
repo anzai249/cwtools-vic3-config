@@ -33,8 +33,8 @@ law_group = {
     linked_social_hierarchy = <social_hierarchy>
 
     ## cardinality = 0..1
-    change_allowed_trigger = {
-        ## cardinality = 1..inf
-        alias_name[trigger] = alias_match_left[trigger]
-    }
+    change_allowed_trigger = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    enable = single_alias_right[trigger_clause]
 }

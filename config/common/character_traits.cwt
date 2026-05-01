@@ -41,11 +41,18 @@ character_trait = {
     ### Applies to building levels owned by the company that the character is the executive for
     executive_modifier = single_alias_right[modifier_clause]
 
+    ## cardinality = 0..1
+    affected_naval_mission_types = {
+        ## cardinality = 0..inf
+        <naval_mission_type>
+    }
+
     ## cardinality = 0..inf
     ### Applies to the Character if they are an agitator
     agitator_modifier = single_alias_right[modifier_clause]
 
     ## replace_scope = { root = character this = character }
+    ## cardinality = 0..1
     ### Used to determine if this trait is a valid random choice
     possible = single_alias_right[trigger_clause]
 

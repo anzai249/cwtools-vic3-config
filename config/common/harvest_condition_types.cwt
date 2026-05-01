@@ -2,9 +2,14 @@ types = {
     type[harvest_condition_type] = {
         path = "game/common/harvest_condition_types"
         path_extension = .txt
+        subtype[sea] = {
+            area_type = sea
+        }
         localisation = {
             ## required
             name = "$"
+            ## required
+            desc = "$_desc"
         }
         images = {
             ## primary
@@ -29,6 +34,12 @@ harvest_condition_type = {
 
     ### Up to what distance from this state does the event also apply. 0 = only epicenter, 1 = direct neighbors, etc
     range = single_alias_right[formula]
+
+    ## cardinality = 0..1
+    area_type = enum[harvest_condition_area_type]
+
+    ## cardinality = 0..1
+    has_animation = bool
 
     ### How long the event will last in weeks
     duration = single_alias_right[formula]

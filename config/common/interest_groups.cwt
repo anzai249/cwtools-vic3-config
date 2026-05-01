@@ -79,6 +79,17 @@ interest_group = {
 
     commander_weight = single_alias_right[formula]
 
+    magnate_weight = single_alias_right[formula]
+
+    ### Multiplier applied to the weight for an appropriate commander will be selected from the character pool to lead the IG
+    commander_leader_weight = single_alias_right[formula]
+
+    ### Multiplier applied to the weight for an appropriate magnate will be selected from the character pool to lead the IG
+    magnate_leader_weight = single_alias_right[formula]
+
+    ### Multiplier applied to the weight for an appropriate executive will be selected from the character pool to lead the IG
+    executive_leader_weight = single_alias_right[formula]
+
     ## cardinality = 0..1
     executive_weight = single_alias_right[formula]
 
@@ -96,9 +107,7 @@ interest_group = {
 
     female_politician_chance = single_alias_right[formula]
 
-    female_agitator_chance = single_alias_right[formula]
+    female_monarch_chance = single_alias_right[formula]
 
-    ### The chance that a commander belonging to this IG takes over leadership when it changes
-    ### scope:character is the most popular commander in the IG
-    commander_leader_chance = single_alias_right[formula]
+    female_agitator_chance = single_alias_right[formula]
 }

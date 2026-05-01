@@ -55,4 +55,7 @@ character_interaction = {
     ## cardinality = 0..1
     ### Whether to require confirmation
     show_confirmation_box = bool
+
+    ## cardinality = 0..1
+    ai_will_do = single_alias_right[trigger_clause]
 }

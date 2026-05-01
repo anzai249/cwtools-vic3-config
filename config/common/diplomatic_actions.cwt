@@ -150,6 +150,12 @@ diplomatic_action = {
         market_owner = enum[market_owners]
 
         ## cardinality = 0..1
+        max_target_involvement = value_field
+
+        ## cardinality = 0..1
+        target_involvement_applies_to = enum[treaty_article_target]
+
+        ## cardinality = 0..1
         ### How many months after being established is it not possible to break this pact, overriden by OBLIGATION_FORCED_PACT_MONTHS if obligation is used, cannot be lower than PACT_REQUIRES_APPROVAL_MIN_FORCED_MONTHS for pacts that require approval
         forced_duration = int
 

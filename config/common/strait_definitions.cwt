@@ -1,0 +1,31 @@
+types = {
+    type[strait_definition] = {
+        path = "game/common/strait_definitions"
+        path_extension = .txt
+        localisation = {
+            name = $
+        }
+    }
+}
+
+strait_definition = {
+    type = enum[strait_type]
+
+    ### Whether you need to control both sides of the strait to block it fully or militarily
+    total_block_requires_full_control = bool
+
+    ### Whether you need to control both sides of the strait to block it fully or militarily
+    military_block_requires_full_control = bool
+
+    ### These need to be land provinces
+    first_land_endpoint = enum[provinces]
+
+    ### These need to be land provinces
+    second_land_endpoint = enum[provinces]
+
+    ### These need to be sea provinces
+    first_sea_endpoint = enum[provinces]
+
+    ### These need to be sea provinces
+    second_sea_endpoint = enum[provinces]
+}

@@ -1,0 +1,94 @@
+types = {
+    type[ship_type] = {
+        path = "game/common/ship_types"
+        path_extension = .txt
+        localisation = {
+            name = $
+            desc = $_desc
+        }
+        images = {
+            icon = icon
+            profile = profile_texture
+        }
+    }
+}
+
+## replace_scope = { root = country this = country }
+ship_type = {
+    icon = filepath
+
+    profile_texture = filepath
+
+    modifier = single_alias_right[modifier_clause]
+
+    ### Which group the ship type belongs to
+    ship_group = <ship_group>
+
+    ### Goods cost for a ship when built
+    construction_goods = single_alias_right[modifier_clause]
+
+    ### Goods cost for a ship when consuming materiel
+    materiel_goods = single_alias_right[modifier_clause]
+
+    ## cardinality = 0..1
+    distance_to_port_modifier = single_alias_right[modifier_clause]
+
+    ### [Optional] Required technologies to construct the ship type. If multiple entries are specified, either one of them is required
+    ## cardinality = 0..1
+    unlocking_technologies = {
+        ## cardinality = 0..inf
+        <technology>
+    }
+
+    ## cardinality = 0..1
+    is_obsolete = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    is_very_obsolete = single_alias_right[trigger_clause]
+
+    ## cardinality = 0..1
+    can_be_flagship = bool
+
+    ### [Optional] If set to no, disables ship modifications for this ship type. Defaults to yes.
+    ## cardinality = 0..1
+    use_modifications = bool
+
+    ### The base cost to construct this ship type, not affected by modification levels.
+    base_construction_cost = value_field
+    ### The base cost to construct this ship type, not affected by modification levels.
+    base_construction_cost = single_alias_right[formula]
+
+    ### [Optional] The variable cost to construct a ship of this type based is multiplied by the total number of modification levels.
+    ## cardinality = 0..1
+    modification_construction_cost = value_field
+    ### [Optional] The variable cost to construct a ship of this type based is multiplied by the total number of modification levels.
+    ## cardinality = 0..1
+    modification_construction_cost = single_alias_right[formula]
+
+    ## cardinality = 0..1
+    combat_power_multiplier = value_field
+    ## cardinality = 0..1
+    combat_power_multiplier = single_alias_right[formula]
+
+    ### [Default = 1] How important is this ship type to build for AI
+    ## cardinality = 0..1
+    ai_weight = value_field
+    ### [Default = 1] How important is this ship type to build for AI
+    ## cardinality = 0..1
+    ai_weight = single_alias_right[formula]
+
+    ### The modification slots and their configurations, each slot should have atleast one modification and all slots marked as required should be present
+    modifications = {
+        ## cardinality = 0..inf
+        <ship_modification_slot> = {
+            ## cardinality = 1..inf
+            <ship_modification>
+        }
+    }
+
+    ## cardinality = 0..1
+    default_modifications = {
+        ## cardinality = 0..inf
+        <ship_modification_slot> = <ship_modification>
+    }
+}

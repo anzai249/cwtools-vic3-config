@@ -41,6 +41,9 @@ alias[effect:remove_cultural_obsession] = <good>
 ## scopes = { character }
 ### Adds a new role to a character add_character_role = general
 alias[effect:add_character_role] = enum[character_role]
+## scopes = { character }
+### Adds a new role to a character add_character_role = general
+alias[effect:add_character_role] = <character_role>
 
 ## scopes = { character }
 ### Promotes/demotes a character a given amount of military ranks
@@ -572,15 +575,61 @@ alias[effect:custom_description_no_bullet] = {
 }
 
 ## scopes = { any }
-### just a tooltip, the scope as object (for grouping, localization). Can also be written as custom_label = { text = key subject = scope (optional) <hidden effects> }
+### just a tooltip, the scope as object (for grouping, localization).
+### custom_label = key; alternatively custom_label = { text = key subject = scope (optional) <hidden effects> }
 alias[effect:custom_label] = localisation
+## scopes = { any }
+### just a tooltip, the scope as object (for grouping, localization).
+### custom_label = key; alternatively custom_label = { text = key subject = scope (optional) <hidden effects> }
+alias[effect:custom_label] = {
+    text = localisation
+
+    ## cardinality = 0..1
+    subject = scope_field
+
+    alias_name[effect] = alias_match_left[effect]
+}
 
 ## scopes = { any }
-### just a tooltip, the scope as subject (for grouping, localization). Can also be written as custom_tooltip = { text = key subject = scope (optional) <hidden effects> }
+### just a tooltip, the scope as object (for grouping, localization). No bullet point.
+### custom_label_no_bullet = key; alternatively custom_label_no_bullet = { text = key subject = scope (optional) <hidden effects> }
+alias[effect:custom_label_no_bullet] = localisation
+## scopes = { any }
+### just a tooltip, the scope as object (for grouping, localization). No bullet point.
+### custom_label_no_bullet = key; alternatively custom_label_no_bullet = { text = key subject = scope (optional) <hidden effects> }
+alias[effect:custom_label_no_bullet] = {
+    text = localisation
+
+    ## cardinality = 0..1
+    subject = scope_field
+
+    alias_name[effect] = alias_match_left[effect]
+}
+
+## scopes = { any }
+### just a tooltip, the scope as subject (for grouping, localization).
+### custom_tooltip = key; alternatively custom_tooltip = { text = key subject = scope (optional) <hidden effects> }
 alias[effect:custom_tooltip] = localisation
 ## scopes = { any }
-### just a tooltip, the scope as subject (for grouping, localization). Can also be written as custom_tooltip = { text = key subject = scope (optional) <hidden effects> }
+### just a tooltip, the scope as subject (for grouping, localization).
+### custom_tooltip = key; alternatively custom_tooltip = { text = key subject = scope (optional) <hidden effects> }
 alias[effect:custom_tooltip] = {
+    text = localisation
+
+    ## cardinality = 0..1
+    subject = scope_field
+
+    alias_name[effect] = alias_match_left[effect]
+}
+
+## scopes = { any }
+### just a tooltip, the scope as subject (for grouping, localization). No bullet point.
+### custom_tooltip_no_bullet = key; alternatively custom_tooltip_no_bullet = { text = key subject = scope (optional) <hidden effects> }
+alias[effect:custom_tooltip_no_bullet] = localisation
+## scopes = { any }
+### just a tooltip, the scope as subject (for grouping, localization). No bullet point.
+### custom_tooltip_no_bullet = key; alternatively custom_tooltip_no_bullet = { text = key subject = scope (optional) <hidden effects> }
+alias[effect:custom_tooltip_no_bullet] = {
     text = localisation
 
     ## cardinality = 0..1
@@ -1233,10 +1282,6 @@ alias[effect:add_change_relations_progress] = {
 }
 
 ## scopes = { country }
-### Will create a declared interest in the target strategic region c:FRA = { add_declared_interest = region_nile_basin }
-alias[effect:add_declared_interest] = <strategic_region>
-
-## scopes = { country }
 ### Adds an enactment-related timed modifier effect to object in scope
 alias[effect:add_enactment_modifier] = {
     name = <modifier_container>
@@ -1464,6 +1509,15 @@ alias[effect:create_character] = {
 
     ## cardinality = 0..1
     is_admiral = bool
+
+    ## cardinality = 0..1
+    home_region = <state_region>
+
+    ## cardinality = 0..1
+    role = <character_role>
+
+    ## cardinality = 0..1
+    holding_type = <building>
 
     ## cardinality = 0..1
     commander_rank = <commander_rank>
@@ -2326,7 +2380,7 @@ alias[effect:create_military_formation] = {
 
     hq_region = scope[strategic_region]
 
-    ## cardinality = 1..inf
+    ## cardinality = 0..inf
     ### Add as many combat unit specifications as necessary
     combat_unit = {
         type = scope[combat_unit_type]
@@ -2349,6 +2403,19 @@ alias[effect:create_military_formation] = {
     mobilization_options = {
         ## cardinality = 0..inf
         scope[mobilization_option]
+    }
+
+    ## cardinality = 0..inf
+    ship = {
+        type = scope[ship_type]
+
+        ## cardinality = 0..1
+        state_region = scope[state_region]
+
+        ## cardinality = 0..1
+        flagship = bool
+
+        count = int
     }
 
     ## cardinality = 0..1
@@ -2548,6 +2615,9 @@ alias[effect:set_character_as_ruler] = bool
 ## scopes = { character }
 ### Remove a specific role from a character
 alias[effect:remove_character_role] = enum[character_role]
+## scopes = { character }
+### Remove a specific role from a character
+alias[effect:remove_character_role] = <character_role>
 
 ## scopes = { state }
 ### Rename a state
@@ -2736,6 +2806,9 @@ alias[effect:start_harvest_condition] = <harvest_condition_type>
 ## scopes = { political_movement }
 ### Adds a character ideology to the scoped political movement
 alias[effect:add_character_ideology] = scope[ideology]
+## scopes = { political_movement }
+### Adds a character ideology to the scoped political movement
+alias[effect:add_character_ideology] = <ideology.character>
 
 ## scopes = { political_movement }
 ### Removes a character ideology from the scoped political movement
@@ -3436,3 +3509,254 @@ alias[effect:add_owned_country] = scope[country]
 ### Removes the scoped company's ownership of the target country
 alias[effect:remove_owned_country] = scope[country]
 
+## scopes = { character }
+### Sets the career length from now for a character in a role. Role can be a specific database role or a role type (e.g. general). If no role is specified, applies to all roles with career end dates.
+### set_career_length = { role = role_key/role_type days/months/years = 10 random_range = { 0.8 1.2 } }
+alias[effect:set_career_length] = {
+    ## cardinality = 0..1
+    role = <character_role>
+    ## cardinality = 0..1
+    role = enum[character_role]
+
+    enum[duration] = int_value_field
+    enum[duration] = single_alias_right[formula]
+
+    ## cardinality = 0..1
+    random_range = {
+        float
+        float
+    }
+}
+
+## scopes = { character }
+### Adds to a character's current career length in a role. Role can be a specific database role or a role type (e.g. general). If no role is specified, applies to all roles with career end dates.
+### add_career_length = { role = role_key/role_type days/months/years = 5 random_range = { 0.8 1.2 } }
+alias[effect:add_career_length] = {
+    ## cardinality = 0..1
+    role = <character_role>
+    ## cardinality = 0..1
+    role = enum[character_role]
+
+    enum[duration] = int_value_field
+    enum[duration] = single_alias_right[formula]
+
+    ## cardinality = 0..1
+    random_range = {
+        float
+        float
+    }
+}
+
+## scopes = { culture }
+### Adds a new taboo to the culture in scope
+alias[effect:add_cultural_taboo] = <good>
+
+## scopes = { culture }
+### Removes a taboo from the culture in scope
+alias[effect:remove_cultural_taboo] = <good>
+
+## scopes = { country }
+### Adds involvement for the scoped country in the given strategic region
+alias[effect:add_involvement] = {
+    strategic_region = scope[strategic_region]
+
+    value = value_field
+    value = single_alias_right[formula]
+}
+
+## scopes = { state state_region }
+### Add a building type as a resource potential to a state region
+alias[effect:add_resource_potential] = <building>
+
+## scopes = { state state_region }
+### Remove a building type from the resource potentials of a state region
+alias[effect:remove_resource_potential] = <building>
+
+## scopes = { state state_region }
+### Change the potential max buildings of a resource in a state region. Only works for building types capped by resources.
+alias[effect:change_resource_potential] = {
+    type = <building>
+
+    amount = value_field
+    amount = single_alias_right[formula]
+}
+
+## scopes = { country }
+### Adds number of supply ships to the scoped country
+alias[effect:add_supply_ships] = int_value_field
+## scopes = { country }
+### Adds number of supply ships to the scoped country
+alias[effect:add_supply_ships] = single_alias_right[formula]
+
+## scopes = { country }
+### Clears the ownership transfer fleet in the scoped country, should be done after a series of set_ship_owner_multiple
+alias[effect:clear_ownership_transfer_fleet] = bool
+
+## scopes = { ship }
+### Set ship owner country, use when setting multiple ships in a row to put them in a single ownership transfer fleet, then use clear_ownership_transfer_fleet to clear it
+alias[effect:set_ship_owner_multiple] = scope[country]
+
+## scopes = { country }
+### Set ship owner country, use when setting multiple ships in a row to put them in a single ownership transfer fleet, then use clear_ownership_transfer_fleet to clear it
+alias[effect:create_ship] = {
+    ### Type of ship to create
+    type = scope[ship_type]
+
+    ### Fleet to assign the created ship to
+    fleet = scope[military_formation]
+
+    ### If specified, saves the created ship in the given scope name
+    ## cardinality = 0..1
+    save_scope_as = value_set[event_target]
+
+    ### Optional name for the ship
+    ## cardinality = 0..1
+    name = localisation
+}
+
+## scopes = { ship }
+### Damages a ship's hull by a given amount
+alias[effect:damage_ship_hull] = value_field
+## scopes = { ship }
+### Damages a ship's hull by a given amount
+alias[effect:damage_ship_hull] = single_alias_right[formula]
+
+## scopes = { ship }
+### Damages a ship's hull by a given percentage of its total health
+alias[effect:damage_ship_hull_percent] = value_field[0..1]
+## scopes = { ship }
+### Damages a ship's hull by a given percentage of its total health
+alias[effect:damage_ship_hull_percent] = single_alias_right[formula]
+
+## scopes = { country }
+### Disable temporary hostilities of a given type between two countries
+alias[effect:disable_temporary_hostilities] = {
+    country = <country_definition>
+    country = scope[country]
+
+    type = enum[temporary_hostility_type]
+}
+
+## scopes = { country }
+### Enable temporary hostilities between two countries for a duration
+alias[effect:enable_temporary_hostilities] = {
+    country = <country_definition>
+    country = scope[country]
+
+    type = enum[temporary_hostility_type]
+
+    duration = {
+        enum[duration] = int_value_field
+        enum[duration] = single_alias_right[formula]
+    }
+}
+
+## scopes = { ship }
+### Kills a given amount of a ship's crew
+alias[effect:kill_crew] = int_value_field
+## scopes = { ship }
+### Kills a given amount of a ship's crew
+alias[effect:kill_crew] = single_alias_right[formula]
+
+## scopes = { ship }
+### Kills a given percentage of a ship's crew
+alias[effect:kill_crew_percent] = value_field[0..1]
+## scopes = { ship }
+### Kills a given percentage of a ship's crew
+alias[effect:kill_crew_percent] = single_alias_right[formula]
+
+## scopes = { ship }
+### Destroys the scoped ship
+alias[effect:kill_ship] = bool
+
+## scopes = { ship }
+### Assign/unassign the ship as a flagship for the country
+alias[effect:set_as_flagship] = bool
+
+## scopes = { character }
+### Turns the scoped character into an adult if they are not one already.
+alias[effect:set_as_adult] = bool
+
+## scopes = { character }
+### Sets the noble flag of the scoped character.
+alias[effect:set_is_noble] = bool
+
+## scopes = { character }
+### Changes the home state of the scoped character
+alias[effect:set_home_state] = scope[state]
+
+## scopes = { character }
+### Changes the first name of a character to a loc key
+alias[effect:set_first_name] = localisation
+
+## scopes = { character }
+### Changes the last name of a character to a loc key
+alias[effect:set_last_name] = localisation
+
+## scopes = { culture }
+### Sets the name format of a scoped culture
+alias[effect:set_name_format] = enum[culture_name_format]
+
+## scopes = { ship }
+### Set ship owner country
+alias[effect:set_ship_owner] = scope[country]
+
+## scopes = { state_region }
+### Start a harvest condition of type in scoped state region where intensity and duration(in days) are optionally provided
+alias[effect:start_harvest_condition_with_params] = {
+    type = <harvest_condition_type>
+
+    ## cardinality = 0..1
+    intensity = value_field
+    ## cardinality = 0..1
+    intensity = single_alias_right[formula]
+
+    ## cardinality = 0..1
+    duration = int_value_field
+    ## cardinality = 0..1
+    duration = single_alias_right[formula]
+}
+
+## scopes = { character }
+### Unassigns the scoped commander from their formation
+alias[effect:unassign_from_formation] = bool
+
+## scopes = { character }
+### Replaces existing role(s) from a character with another, works with either archetype or database role
+alias[effect:replace_character_roles] = {
+    type = <harvest_condition_type>
+
+    ## cardinality = 0..1
+    add = {
+        ## cardinality = 0..inf
+        enum[character_role]
+
+        ## cardinality = 0..inf
+        <character_role>
+    }
+
+    ## cardinality = 0..1
+    remove = {
+        ## cardinality = 0..inf
+        enum[character_role]
+
+        ## cardinality = 0..inf
+        <character_role>
+    }
+
+    ## cardinality = 0..1
+    remove_all = bool
+}
+
+## scopes = { character }
+### Conditionally retire a character if it should be culled
+alias[effect:retire_character_if_should_be_culled] = bool
+## scopes = { character }
+### Conditionally retire a character if it should be culled
+alias[effect:retire_character_if_should_be_culled] = {
+    ## cardinality = 0..1
+    hidden = bool
+
+    ## cardinality = 0..1
+    value = bool
+}

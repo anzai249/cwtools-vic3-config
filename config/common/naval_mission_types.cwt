@@ -1,0 +1,69 @@
+types = {
+    type[naval_mission_type] = {
+        path = "game/common/naval_mission_types"
+        path_extension = .txt
+        localisation = {
+            name = $
+            desc = $_desc
+        }
+        images = {
+            icon = icon
+        }
+    }
+}
+
+naval_mission_type = {
+    icon = filepath
+
+    ## cardinality = 0..1
+    intercept = bool
+
+    ## cardinality = 0..1
+    blockade = bool
+
+    ## cardinality = 0..1
+    raid_supply = bool
+
+    ## cardinality = 0..1
+    protect_supply = bool
+
+    ## cardinality = 0..1
+    project_power = bool
+
+    ## cardinality = 0..1
+    clicksound = enum[sound_effects]
+
+    ## cardinality = 0..1
+    ai_will_cancel_for_transportation = bool
+
+    ## cardinality = 0..1
+    ai_distance_penalty_multiplier = value_field
+
+    ## cardinality = 0..1
+    intercept_targets = {
+        ## cardinality = 0..inf
+        enum[naval_mission_type_target]
+    }
+
+    ## cardinality = 0..1
+    piracy_targets = {
+        ## cardinality = 0..inf
+        enum[naval_mission_type_target]
+    }
+
+    ## cardinality = 0..1
+    port_bombardment = bool
+
+    ## cardinality = 0..1
+    piracy = bool
+
+    ### The modifier that will apply to the fleet when they are active in the mission area
+    ## cardinality = 0..1
+    modifier = single_alias_right[modifier_clause]
+
+    ## cardinality = 0..1
+    command_modifier = single_alias_right[modifier_clause]
+
+    ## cardinality = 0..1
+    potential = single_alias_right[trigger_clause]
+}

@@ -9,6 +9,7 @@ types = {
     }
 }
 
+## replace_scope = { ROOT = country THIS = country }
 combat_unit_type = {
     group = <combat_unit_group>
 
@@ -33,11 +34,12 @@ combat_unit_type = {
     ## cardinality = ~1..1
     max_manpower = int
 
-    ## push_scope = country
+    ## cardinality = ~1..1
+    supply_capacity = int
+
     ## cardinality = 0..1
     can_build = single_alias_right[trigger_clause]
 
-    ## push_scope = country
     ## cardinality = 0..1
     ### Both this and "can build" must be true to build conscripts
     can_build_conscript = single_alias_right[trigger_clause]
@@ -51,6 +53,7 @@ combat_unit_type = {
     ## cardinality = ~1..inf
     combat_unit_image = {
         ## cardinality = 0..1
+        ## replace_scope = { ROOT = culture THIS = culture }
         trigger = single_alias_right[trigger_clause]
 
         texture = filepath

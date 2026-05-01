@@ -125,7 +125,7 @@ alias[trigger:has_religion] = <religion>
 
 ## scopes = { character }
 ### Checks if character has the specified role has_role = role
-alias[trigger:has_role] = enum[character_role]
+alias[trigger:has_role] = <character_role>
 
 ## scopes = { character }
 ### Checks if character has specific trait has_trait = trait
@@ -135,7 +135,7 @@ alias[trigger:has_trait] = <character_trait>
 ### Checks if a commander is advancing on a front is_advancing_on_front = front
 alias[trigger:is_advancing_on_front] = scope[front]
 
-## scopes = { character }
+## scopes = { character ship }
 ### Checks if a Commander is attacker in a battle is_attacker_in_battle = bool
 alias[trigger:is_attacker_in_battle] = bool
 
@@ -147,7 +147,7 @@ alias[trigger:is_busy] = bool
 ### Checks if the scoped character is alive is_character_alive = bool
 alias[trigger:is_character_alive] = bool
 
-## scopes = { character }
+## scopes = { character ship }
 ### Checks if a Commander is defender in a battle is_defender_in_battle = bool
 alias[trigger:is_defender_in_battle] = bool
 
@@ -155,11 +155,7 @@ alias[trigger:is_defender_in_battle] = bool
 ### Check if character is female is_female = bool
 alias[trigger:is_female] = bool
 
-## scopes = { character }
-### Checks whether the scoped character is an heir is_heir = yes / no
-alias[trigger:is_heir] = bool
-
-## scopes = { character }
+## scopes = { character ship }
 ### Checks if a Commander is engaged in battle is_in_battle = bool
 alias[trigger:is_in_battle] = bool
 
@@ -178,10 +174,6 @@ alias[trigger:is_monarch] = bool
 ## scopes = { character military_formation }
 ### Checks is a character has been assigned to a Front and has arrived there is_on_front = yes/no
 alias[trigger:is_on_front] = bool
-
-## scopes = { character }
-### Checks if character is a ruler/head of state of a country is_ruler = bool
-alias[trigger:is_ruler] = bool
 
 ## scopes = { law_type }
 ### Checks if scope law type is in the same group as the target law type scope is_same_law_group_as = <law type scope>
@@ -330,8 +322,6 @@ alias[trigger:global_variable_list_size] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -602,10 +592,6 @@ alias[trigger:has_terrain] = <terrain>
 ### Check if the province is on land
 alias[trigger:is_province_land] = bool
 
-## scopes = { interest_marker }
-### Is the interest marker active is_interest_active = yes/no
-alias[trigger:is_interest_active] = bool
-
 ## scopes = { country }
 ### True if country is independent or permitted to start their own Diplomatic Plays aggressive_diplomatic_plays_permitted = bool
 alias[trigger:aggressive_diplomatic_plays_permitted] = bool
@@ -734,10 +720,6 @@ alias[trigger:has_consumption_tax] = scope[goods]
 ## scopes = { country }
 ### Check if the country has convoys being sunk through convoy raiding
 alias[trigger:has_convoys_being_sunk] = bool
-
-## scopes = { country }
-### Checks if the country has decreasing interest levels
-alias[trigger:has_decreasing_interests] = bool
 
 ## scopes = { country }
 ### Checks if two countries have an active diplomatic pact of type
@@ -1349,10 +1331,6 @@ alias[trigger:has_active_building] = <building>
 ### Check if a supported scope has a certain timed modifier
 alias[trigger:has_modifier] = <modifier_container>
 
-## scopes = { country market state }
-### Check if state has at least one port has_port = yes/no
-alias[trigger:has_port] = bool
-
 ## scopes = { political_movement }
 ### Check if a political movement is a particular type is_political_movement_type = movement_to_enact
 alias[trigger:is_political_movement_type] = <political_movement>
@@ -1691,38 +1669,12 @@ alias[trigger:government_wage_level] == enum[wage_level]
 alias[trigger:has_battle_condition] = <battle_condition>
 
 ## scopes = { country }
-### Checks that a country has a certain percentage of a specific navy unit type
-alias[trigger:country_navy_unit_type_fraction] = {
-    target = scope[combat_unit_type]
-
-    value == value_field
-    value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
-    value == $define_reference
-}
-
-## scopes = { military_formation }
-### Checks that a formation has a certain percentage of a specific navy unit type
-alias[trigger:formation_navy_unit_type_fraction] = {
-    target = scope[combat_unit_type]
-
-    value == value_field
-    value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
-    value == $define_reference
-}
-
-## scopes = { country }
 ### Checks that a country has a certain percentage of a specific army unit type
 alias[trigger:country_army_unit_type_fraction] = {
     target = scope[combat_unit_type]
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -1733,8 +1685,6 @@ alias[trigger:formation_army_unit_type_fraction] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -1745,8 +1695,6 @@ alias[trigger:additional_war_exhaustion] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -1757,8 +1705,6 @@ alias[trigger:army_mobilization_option_fraction] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -1782,8 +1728,6 @@ alias[trigger:country_has_building_group_levels] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -1794,8 +1738,6 @@ alias[trigger:country_has_building_type_levels] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -1806,8 +1748,6 @@ alias[trigger:enemy_contested_wargoals] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -2256,10 +2196,6 @@ alias[trigger:can_queue_building_levels] == int_value_field
 ## scopes = { state building }
 ### Checks a states infrastructure balance
 alias[trigger:state_infrastructure_balance] == int_value_field
-
-## scopes = { strategic_region }
-### Checks a country can have declared interest of a strategic region
-alias[trigger:can_have_declared_interest_here] = scope[country]
 
 ## scopes = { harvest_condition }
 ### Checks whether a country has a specific intensity of the harvest condition in scope
@@ -2738,11 +2674,7 @@ alias[trigger:can_create_treaty] = {
     ### (default: 0) must be a non negative number, fractional parts will be ignored (truncation)
     binding_period = {
         ## cardinality = 0..1
-        enum[duration] = int
-        ## cardinality = 0..1
-        enum[duration] = <script_value>
-        ## cardinality = 0..1
-        enum[duration] = <static_value>
+        enum[duration] = int_value_field
         ## cardinality = 0..1
         enum[duration] = enum[duration]
     }
@@ -3526,8 +3458,6 @@ alias[trigger:years_to_incorporate] = {
 
     value == value_field
     value == single_alias_right[formula]
-    value == <script_value>
-    value == <static_value>
     value == $define_reference
 }
 
@@ -3560,3 +3490,225 @@ alias[trigger:ig_approval] == value_field
 ## scopes = { interest_group }
 ### Compare to scoped interest group approval
 alias[trigger:ig_approval] == $define_reference
+
+## scopes = { character }
+### Checks if character has a role of the specified archetype
+alias[trigger:has_role_of_type] = enum[character_role]
+
+## scopes = { character }
+### Checks if character is a ruler/head of state of any country
+alias[trigger:is_ruler_of_any_country] = bool
+
+## scopes = { character }
+### Checks if character is a ruler/head of state of a country they don't live in
+alias[trigger:is_ruler_of_other_country] = bool
+
+## scopes = { character }
+### Checks if character is a ruler/head of state of the country they live in
+alias[trigger:is_ruler_of_own_country] = bool
+
+## scopes = { character }
+### Checks whether the scoped character is the heir in the country they live in
+alias[trigger:is_heir_of_own_country] = bool
+
+## scopes = { country }
+### Checks that a country has a certain fraction of a specific ship type
+alias[trigger:country_ship_type_fraction] = {
+    target = scope[ship_type]
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { military_formation }
+### Checks that a formation has a certain fraction of a specific ship type
+alias[trigger:formation_ship_type_fraction] = {
+    target = scope[ship_type]
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { country }
+### Checks the scoped country's interest tier rank in a specific strategic region
+alias[trigger:has_strategic_region_interest_tier] = {
+    strategic_region = scope[strategic_region]
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { country }
+### Compares the highest interest tier rank (scope country) among strategic regions where both countries have an interest.
+### Returns -1 if there are no overlapping interests.
+alias[trigger:highest_overlapping_interest_tier] = {
+    target = scope[country]
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { country state }
+### Checks the political strength share of a pop type, religion or culture in a country or state. Exactly one of pop_type, religion or culture must be specified.
+alias[trigger:political_strength_share] = {
+    ## cardinality = 0..1
+    pop_type = scope[pop_type]
+    ## cardinality = 0..1
+    pop_type = <pop_type>
+
+    ## cardinality = 0..1
+    religion = scope[religion]
+    ## cardinality = 0..1
+    religion = <religion>
+
+    ## cardinality = 0..1
+    culture = scope[culture]
+    ## cardinality = 0..1
+    culture = <culture>
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { country state }
+### Checks the wealth political strength share of a pop type, religion or culture in a country or state. Exactly one of pop_type, religion or culture must be specified.
+alias[trigger:wealth_share] = {
+    ## cardinality = 0..1
+    pop_type = scope[pop_type]
+    ## cardinality = 0..1
+    pop_type = <pop_type>
+
+    ## cardinality = 0..1
+    religion = scope[religion]
+    ## cardinality = 0..1
+    religion = <religion>
+
+    ## cardinality = 0..1
+    culture = scope[culture]
+    ## cardinality = 0..1
+    culture = <culture>
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { country }
+### Compares the aggregated AI strategy region score for the specified strategic region in country scope
+### Returns 0 in case the country is player controled
+alias[trigger:region_score] = {
+    strategic_region = scope[strategic_region]
+
+    value == value_field
+    value == single_alias_right[formula]
+    value == $define_reference
+}
+
+## scopes = { country }
+### Check if the scoped country has any level of strait control
+alias[trigger:has_any_strait_control] = scope[country]
+
+## scopes = { country }
+### Check if the scoped country has any strait
+alias[trigger:has_any_strait_province] = scope[country]
+
+## scopes = { military_formation }
+### Checks if a Fleet has a naval mission with an invalid area
+alias[trigger:has_naval_mission_with_invalid_area] = bool
+
+## scopes = { country }
+### Check if scoped country has at least one port
+alias[trigger:has_port_country] = bool
+
+## scopes = { market }
+### Check if scoped market has at least one port
+alias[trigger:has_port_market] = bool
+
+## scopes = { state }
+### Check if scoped state has at least one port
+alias[trigger:has_port_state] = bool
+
+## scopes = { country }
+### Checks if the scoped country's AI has the specified stance for a strategic region
+alias[trigger:has_region_stance] = {
+    region = scope[strategic_region]
+
+    stance = <ai_strategic_region_stance_type>
+}
+
+## scopes = { character }
+### Check if character is an adult
+alias[trigger:is_adult] = bool
+
+## scopes = { character_role }
+### Checks if the character role is auto assigned
+alias[trigger:is_auto_assigned] = bool
+
+## scopes = { character_role }
+### Checks if the scoped character role is a specific role
+alias[trigger:is_character_role] = <character_role>
+
+## scopes = { character_role }
+### Checks if the scoped character role is of a specific archetype
+alias[trigger:is_character_role_type] = enum[character_role]
+
+## scopes = { ship }
+### Checks if a ship is damaged
+alias[trigger:is_damaged] = bool
+
+## scopes = { ship }
+### Checks if the scoped ship is assigned as the flagship
+alias[trigger:is_flagship] = bool
+
+## scopes = { ship }
+### Checks if a ship is in port
+alias[trigger:is_in_port] = bool
+
+## scopes = { treaty }
+### Checks if the scoped treaty was signed before the game start date
+alias[trigger:is_historical_treaty] = bool
+
+## scopes = { character }
+### Checks if character is the leader of their interest group
+alias[trigger:is_interest_group_leader] = bool
+
+## scopes = { country }
+### Checks if the scoped country is local in specified strategic region
+alias[trigger:is_local_country] = scope[strategic_region]
+
+## scopes = { character }
+### Check if character is a noble
+alias[trigger:is_noble] = bool
+
+## scopes = { ship }
+### Checks if scoped ship is of the specified type
+alias[trigger:is_ship_type] = scope[ship_type]
+
+## scopes = { character }
+### Checks if the character's primary role is the specified role
+alias[trigger:primary_role] = <character_role>
+
+## scopes = { character }
+### Checks if the character's remaining career length meets a duration threshold. Role can be a specific database role, a role type, or omitted to use the role furthest from career end.
+alias[trigger:remaining_career_length] = {
+    ## cardinality = 0..1
+    role = <character_role>
+    ## cardinality = 0..1
+    role = enum[character_role]
+
+    enum[duration] == int_value_field
+    enum[duration] == enum[duration]
+}
+
+## scopes = { character_role }
+### Checks if the character role spawns characters to the pool
+alias[trigger:spawns_characters_to_pool] = bool
+
+## scopes = { country }
+### Check if the country has naval hostilities with any country it is not also at war with
+alias[trigger:has_any_naval_only_hostilities] = bool
